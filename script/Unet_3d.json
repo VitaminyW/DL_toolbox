@@ -1,0 +1,36 @@
+{
+    "Manager":{"path":"/data/disk1/yewei/MICCA_cine/Code/Manager/CineManager.py",
+               "class_name":"CineManager"},
+    "Model":{"path":"/data/disk1/yewei/MICCA_cine/Code/Network/UNet_3D.py",
+             "class_name":"Model",
+             "parameters":{"n_input_channels":2, "n_output_channels":2}},
+    
+    "DataSet":{"path":"/data/disk1/yewei/MICCA_cine/Code/toolbox/Dataset/Datasets.py",
+               "class_name":"Dataframe_Dataset"},
+    "train":{"epoch":200,
+             "device":["cuda:5"],
+             "batch_size":{"train":14,"val":14},
+             "times_per_valid":10,
+             "times_per_save":10,
+             "checkpoint_path":"/data/disk1/yewei/MICCA_cine/Code/exprs/UNet_3D_Model23年06月11日05点34分/params/model-199.pth",
+             "DataSet":{"train":{"csv_path":"/data/disk1/yewei/MICCA_cine/Code/train.csv"},
+                        "val":{"csv_path":"/data/disk1/yewei/MICCA_cine/Code/val.csv"}
+                        },
+             "Loss":{
+                "path":"/data/disk1/yewei/MICCA_cine/Code/Loss/INV-SSIM.py",
+                "name":"inv_ssim_loss"
+                    },
+            "Metrics_Dict":{"path":"/data/disk1/yewei/MICCA_cine/Code/Metrics/MRI_metrics.py",
+                            "name":"MRI_dict"
+                            },
+            "Pretreatment":{"path":"/data/disk1/yewei/MICCA_cine/Code/Pretreatment/Normalize.py",
+                            "name":"cine_normalize"
+                            }
+                        },
+    "validate":{"DataSet":{"csv_path":"/data/disk1/yewei/MICCA_cine/Code/validate.csv"}},
+    "Optimizer":{"Name":"Adam",
+                 "lr":1e-3},
+    "Other":{"save_path":"./exprs/",
+             "reminder_token":"ZxCFYLdzAXWzBPHVbH9JF5",
+             "tb_writer":"logs"}
+}
