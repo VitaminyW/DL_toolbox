@@ -1,8 +1,8 @@
 import json
-from toolbox.Manager.utils import dynamic_loading
+from Manager.utils import dynamic_loading
 from pathlib import Path
 
-if __name__ == '__main__':
+def run():
     import sys
     config_file = sys.argv[1]
     print(f'config_file is {config_file}')

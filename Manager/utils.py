@@ -3,7 +3,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 from types import FunctionType
 from typing import List
-from pathlib import PosixPath
+from pathlib import Path
 from importlib import import_module
 import sys
 
@@ -15,7 +15,7 @@ def get_now_datetime():
     return time.strftime('%Y年%m月%d日%H点%M分', time.localtime(time.time()))[2:]
 
 
-def dynamic_loading(filepath:PosixPath, contents:List):
+def dynamic_loading(filepath:Path, contents:List):
     """
     动态从python文件加载特定的实例
     :param filepath: config文件里的python文件路径

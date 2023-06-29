@@ -9,8 +9,7 @@ Email: 1779723554@qq.com
 from pathlib import Path, PosixPath
 import pandas as pd
 import numpy as np
-from typing import List, Any
-from types import FunctionType
+from typing import List, Any, Union, Callable
 
 
 class IndexMaker:
@@ -36,7 +35,7 @@ class IndexMaker:
         
 
 class IndexFileMaker(IndexMaker):
-    def __init__(self, files:List[PosixPath], val_size: int or float, split_example_func:None or FunctionType):
+    def __init__(self, files:List[Path], val_size: int or float, split_example_func:Union[None,Callable]):
         """
         :param files: 包含所有样本文件路径的列表
         :param val_size: 验证集的规模
@@ -69,6 +68,8 @@ class IndexFileMaker(IndexMaker):
     def __getitem__(self, key):
         if key not in ['val','train']:
             raise ValueError('key的取值只能在val和train中')
+        if len(self.indexs[key]) == 0:
+            return []
         return np.concatenate([self.examples[index_][1] for index_ in self.indexs[key]]).tolist()
     
     def get_dataframe(self, other_parents:None or List[PosixPath]):
@@ -76,7 +77,13 @@ class IndexFileMaker(IndexMaker):
         :param other_parents:使用同一个文件名在不同路径下作为不同的输入，如['csm/A.mat','xu/A.mat','gt/A.mat']
         """
         if other_parents is None:
-            return {key: pd.DataFrame([[item] for item in self[key]]) for key in self.indexs}
+            result = {}
+            for key in self.indexs:
+                if len(self.indexs[key]) == 0:
+                    result[key] = []
+                else:
+                    result[key] = pd.DataFrame([[item] for item in self[key]])
+            return result
         else:
             df_dict = {}
             for key in self.indexs:
