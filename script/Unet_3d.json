@@ -23,7 +23,7 @@
             "Metrics_Dict":{"path":"/data/disk1/yewei/MICCA_cine/Code/Metrics/MRI_metrics.py",
                             "name":"MRI_dict"
                             },
-            "Pretreatment":{"path":"/data/disk1/yewei/MICCA_cine/Code/Pretreatment/Normalize.py",
+            "Preprocessing":{"path":"/data/disk1/yewei/MICCA_cine/Code/Pretreatment/Normalize.py",
                             "name":"cine_normalize"
                             }
                         },
